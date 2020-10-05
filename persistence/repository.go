@@ -6,7 +6,8 @@ import (
 )
 
 type PumpingRepo interface {
-	RemoveWaterInTank(cc model.CC) error
+	UpdateWaterVolume(cc model.CC) error
+	AddWaterVolume(cc model.CC) error
 }
 
 func NewPumping() PumpingRepo {
@@ -16,12 +17,12 @@ func NewPumping() PumpingRepo {
 type pumping struct {
 }
 
-func (p *pumping) RemoveWaterInTank(cc model.CC) error {
-	var volume model.CC
-	volume = 50000
-	fmt.Printf("balance of water in tank : %v\n", volume)
-	fmt.Println("remove water in tank")
-	volume = volume - cc
-	fmt.Printf("balance of water in tank : %v\n", volume)
+func (p *pumping) AddWaterVolume(cc model.CC) error {
+	fmt.Println("add water to tank ",cc)
+	return nil
+}
+
+func (p *pumping) UpdateWaterVolume(cc model.CC) error {
+	fmt.Println("balance water in tank ",cc)
 	return nil
 }

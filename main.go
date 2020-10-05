@@ -4,16 +4,18 @@ import (
 	"fmt"
 	"phyze/repository-example/service"
 	"time"
-
-	"github.com/opentracing/opentracing-go/log"
 )
 
 func main() {
-	pushedTime := time.Duration(6000)
 	wdsvc := service.NewWaterDispenser()
+	if err := wdsvc.AddWaterToTank(30000); err != nil {
+		panic(err)
+	}
+
+	pushedTime := time.Duration(6000)
 	cc, err := wdsvc.Push(pushedTime)
 	if err != nil {
-		log.Error(err)
+		panic(err)
 	}
-	fmt.Printf("volume of water that pushed : %v", cc)
+	fmt.Printf("The volume of water pumped %v cc", cc)
 }
